@@ -6,7 +6,12 @@ resource "null_resource" "test1" {
     host     = aws_instance.os1.public_ip
   }
 
- 
-  
-
+provisioner "remote-exec" {
+    inline = [
+      "sudo yum install http -y",
+      "sudo yum install php -y",
+      "sudo systemctl start httpd",
+      "sudo systemctl start php",
+    ]
+  }
 }
